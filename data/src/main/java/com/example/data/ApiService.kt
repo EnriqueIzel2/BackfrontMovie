@@ -1,5 +1,6 @@
 package com.example.data
 
+import com.example.data.app.repository.dto.MovieResultDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,5 +11,5 @@ interface ApiService {
   }
 
   @GET("popular")
-  fun getPopularMovie(@Query("api_key") api: String = API_KEY)
+  suspend fun getPopularMovie(@Query("api_key") api: String = API_KEY) : MovieResultDTO
 }
