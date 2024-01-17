@@ -18,7 +18,7 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
   val popularMovies: LiveData<ViewState<List<Movie>?>> = _popularMovies.map { it }
 
   fun getPopular() {
-    viewModelScope.launch(Dispatchers.IO) {
+    viewModelScope.launch(Dispatchers.Main) {
       runCatching {
         _popularMovies.value = ViewState.Loading(true)
 
