@@ -3,10 +3,12 @@ package com.example.backfrontmovie.app.view.fragments.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.backfrontmovie.databinding.PopularItemViewBinding
 import com.example.data.app.repository.model.Movie
 
-class PopularAdapter(private val items: List<Movie>) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(private val items: List<Movie>) :
+  RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val inflater = LayoutInflater.from(parent.context)
@@ -30,8 +32,11 @@ class PopularAdapter(private val items: List<Movie>) : RecyclerView.Adapter<Popu
   inner class ViewHolder(private val binding: PopularItemViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-      fun bind(item: Movie) {
-        binding.textView.text = item.originalTitle
-      }
+    fun bind(item: Movie) {
+      binding.cardMovieTitle.text = item.originalTitle
+
+      val postPath = "https://image.tmdb.org/t/p/w185${item.posterPath}"
+      Glide.with(binding.root.context).load(postPath).into(binding.cardMoviePoster)
     }
+  }
 }
