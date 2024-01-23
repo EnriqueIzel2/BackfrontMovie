@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
@@ -17,6 +19,7 @@ class PopularFragment : Fragment() {
 
   private lateinit var binding: FragmentPopularBinding
   private val recyclerView by lazy { binding.popularRecyclerView }
+  private val progressBar by lazy { binding.popularProgressBar }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,7 @@ class PopularFragment : Fragment() {
     viewModel.popularMovies.observe(viewLifecycleOwner) {
 
       when (it) {
+        is ViewState.Loading -> handleLoading(it.loading)
         is ViewState.Success -> setAdapter(it.data)
         else -> {
           Log.e("Erro", "erro ao iniciar o viewModel de popular")
@@ -51,6 +55,14 @@ class PopularFragment : Fragment() {
     }
 
     viewModel.getPopular()
+  }
+
+  private fun handleLoading(mustShow: Boolean) {
+    if (mustShow) {
+      progressBar.isVisible = true
+    } else {
+      progressBar.isGone = true
+    }
   }
 
   private fun setAdapter(data: List<Movie>?) {
