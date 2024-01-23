@@ -7,7 +7,10 @@ import com.bumptech.glide.Glide
 import com.example.backfrontmovie.databinding.PopularItemViewBinding
 import com.example.data.app.repository.model.Movie
 
-class PopularAdapter(private val items: List<Movie>) :
+class PopularAdapter(
+  private val items: List<Movie>,
+  private val onClickListener: ((Movie) -> Unit)
+) :
   RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,6 +40,13 @@ class PopularAdapter(private val items: List<Movie>) :
 
       val postPath = "https://image.tmdb.org/t/p/w185${item.posterPath}"
       Glide.with(binding.root.context).load(postPath).into(binding.cardMoviePoster)
+
+      binding.cardMovieReleaseDate.text = item.releaseDate
+      binding.cardMovieOverview.text = item.overview
+
+      itemView.setOnClickListener {
+        onClickListener.invoke(item)
+      }
     }
   }
 }
