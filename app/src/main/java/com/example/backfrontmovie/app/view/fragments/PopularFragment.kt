@@ -66,7 +66,9 @@ class PopularFragment : Fragment() {
   }
 
   private fun setAdapter(data: List<Movie>?) {
-    val popularAdapter = PopularAdapter(data.orEmpty())
+    val popularAdapter = PopularAdapter(data.orEmpty()) {
+      Log.i("Cliquei no filme", "setAdapter: ${it.title}")
+    }
     recyclerView.adapter = popularAdapter
   }
 }
