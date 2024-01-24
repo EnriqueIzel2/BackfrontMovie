@@ -1,14 +1,18 @@
 package com.example.data.app.repository.model
 
+import android.os.Parcelable
 import com.example.data.app.repository.dto.GenreDTO
 import com.example.data.app.repository.dto.ProductionCompanyDTO
 import com.example.data.app.repository.dto.ProductionCountryDTO
 import com.example.data.app.repository.dto.SpokenLanguageDTO
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Movie(
   val adult: Boolean? = null,
   val backdropPath: String? = null,
-  val belongsToCollection: Any? = null,
+  val belongsToCollection: @RawValue Any? = null,
   val budget: Int? = null,
   val genres: List<GenreDTO?>? = null,
   val homepage: String? = null,
@@ -31,4 +35,4 @@ data class Movie(
   val video: Boolean? = null,
   val voteAverage: Double? = null,
   val voteCount: Int? = null
-)
+) : Parcelable
