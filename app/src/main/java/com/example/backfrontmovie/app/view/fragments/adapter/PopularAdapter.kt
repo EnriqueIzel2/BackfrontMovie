@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.backfrontmovie.commons.extensions.formatToLatamDate
 import com.example.backfrontmovie.databinding.PopularItemViewBinding
 import com.example.data.app.repository.model.Movie
 
@@ -41,7 +42,7 @@ class PopularAdapter(
       val postPath = "https://image.tmdb.org/t/p/w185${item.posterPath}"
       Glide.with(binding.root.context).load(postPath).into(binding.cardMoviePoster)
 
-      binding.cardMovieReleaseDate.text = item.releaseDate
+      binding.cardMovieReleaseDate.text = item.releaseDate?.formatToLatamDate()
       binding.cardMovieOverview.text = item.overview
 
       itemView.setOnClickListener {
