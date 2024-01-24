@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.backfrontmovie.app.view.MainActivity
 import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
 import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
@@ -67,7 +68,7 @@ class PopularFragment : Fragment() {
 
   private fun setAdapter(data: List<Movie>?) {
     val popularAdapter = PopularAdapter(data.orEmpty()) {
-      Log.i("Cliquei no filme", "setAdapter: ${it.title}")
+      (requireActivity() as MainActivity).showDetailsActivity(it)
     }
     recyclerView.adapter = popularAdapter
   }
