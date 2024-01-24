@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.backfrontmovie.R
+import com.example.backfrontmovie.app.view.details.DetailsActivity
 import com.example.backfrontmovie.databinding.ActivityMainBinding
+import com.example.data.app.repository.model.Movie
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,5 +28,10 @@ class MainActivity : AppCompatActivity() {
     val navController = navHost.navController
 
     bottomNavigation.setupWithNavController(navController)
+  }
+
+  fun showDetailsActivity(item: Movie) {
+    val intent = DetailsActivity.newIntent(this, item)
+    startActivity(intent)
   }
 }
