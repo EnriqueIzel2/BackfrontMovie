@@ -1,8 +1,11 @@
 package com.example.data.app.repository.dto
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ProductionCompanyDTO(
   @SerializedName("id")
   val id: Int?,
@@ -12,4 +15,4 @@ data class ProductionCompanyDTO(
   val name: String?,
   @SerializedName("origin_country")
   val originCountry: String?
-)
+) : Parcelable
