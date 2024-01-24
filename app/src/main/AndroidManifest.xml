@@ -15,6 +15,10 @@
         android:theme="@style/Theme.BackfrontMovie"
         tools:targetApi="31">
         <activity
+            android:name=".app.view.details.DetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".app.view.MainActivity" />
+        <activity
             android:name=".app.view.MainActivity"
             android:exported="true">
             <intent-filter>
