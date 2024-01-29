@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="color_primary">#E6007E</color>
+    <color name="color_primary_dark">#B3E6007E</color>
+
     <color name="color_position">#FFFFFF</color>
     <color name="color_background_first_position">#FFB400</color>
     <color name="color_background_others_positions">#1C95F3</color>
