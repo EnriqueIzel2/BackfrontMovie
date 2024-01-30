@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:contentDescription="@string/card_poster_movie"
+            android:transitionName="transition_poster"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
