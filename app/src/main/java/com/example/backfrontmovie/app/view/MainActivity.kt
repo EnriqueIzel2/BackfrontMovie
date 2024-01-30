@@ -2,7 +2,9 @@ package com.example.backfrontmovie.app.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.backfrontmovie.R
@@ -32,6 +34,13 @@ class MainActivity : AppCompatActivity() {
 
   fun showDetailsActivity(item: Movie) {
     val intent = DetailsActivity.newIntent(this, item)
-    startActivity(intent)
+
+    val transitionOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+      this,
+      binding.root as View,
+      "transition_poster"
+    )
+
+    startActivity(intent, transitionOptions.toBundle())
   }
 }
