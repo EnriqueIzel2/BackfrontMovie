@@ -13,4 +13,12 @@ class MovieUseCaseImpl(private val repository: MovieRepository) : MovieUseCase {
 
     return ViewState.Success(movies)
   }
+
+  override suspend fun getTopRated(): ViewState<List<Movie>?> {
+    val response = repository.getTopRated()
+
+    val movies = MovieMapper.getMovieResponse(response)
+
+    return ViewState.Success(movies)
+  }
 }
