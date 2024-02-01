@@ -34,4 +34,25 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
       }
     }
   }
+
+  private val _topRatedMovies = MediatorLiveData<ViewState<List<Movie>?>>()
+  val topRatedMovies: LiveData<ViewState<List<Movie>?>> = _topRatedMovies.map { it }
+
+  fun getTopRated() {
+    viewModelScope.launch(Dispatchers.Main) {
+      runCatching {
+        _topRatedMovies.value = ViewState.Loading(true)
+
+        val response = withContext(Dispatchers.IO) {
+          useCase.getTopRated()
+        }
+
+        _topRatedMovies.value = response
+      }.onFailure {
+        _topRatedMovies.value = ViewState.Error(it)
+      }.also {
+        _topRatedMovies.value = ViewState.Loading(false)
+      }
+    }
+  }
 }
