@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_popular"
+        android:id="@+id/popularFragment"
         android:icon="@drawable/icon_home"
         android:title="@string/bottom_menu_item_popular" />
 
     <item
-        android:id="@+id/menu_latest"
+        android:id="@+id/latestFragment"
         android:icon="@drawable/icon_av_timer_24"
         android:title="@string/bottom_menu_item_latest"
         />
