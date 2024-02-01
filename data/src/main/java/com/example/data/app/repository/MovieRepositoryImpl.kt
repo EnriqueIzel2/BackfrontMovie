@@ -8,4 +8,8 @@ class MovieRepositoryImpl(private val remoteDataSource: ApiService) : MovieRepos
   override suspend fun getPopular(): MovieResultDTO {
     return remoteDataSource.getPopularMovie()
   }
+
+  override suspend fun getTopRated(): MovieResultDTO {
+    return remoteDataSource.getTopRated()
+  }
 }
