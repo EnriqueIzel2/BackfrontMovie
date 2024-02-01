@@ -1,60 +1,77 @@
 package com.example.backfrontmovie.app.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.backfrontmovie.R
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import com.example.backfrontmovie.app.view.MainActivity
+import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
+import com.example.backfrontmovie.app.viewmodel.MainViewModel
+import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
+import com.example.backfrontmovie.databinding.FragmentLatestBinding
+import com.example.data.app.repository.model.Movie
+import com.example.data.commons.viewstate.ViewState
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LatestFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LatestFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
-    }
-  }
+  private lateinit var binding: FragmentLatestBinding
+  private val recyclerView by lazy { binding.latestRecyclerView }
+  private val progressBar by lazy { binding.latestProgressBar }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_latest, container, false)
+  ): View {
+    binding = FragmentLatestBinding.inflate(
+      inflater,
+      container,
+      false
+    )
+
+    return binding.root
   }
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LatestFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      LatestFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    setupViewModel()
+  }
+
+  private fun setupViewModel() {
+    val viewModel = MainViewModelFactory().create(MainViewModel::class.java)
+
+    viewModel.topRatedMovies.observe(viewLifecycleOwner) {
+
+      when (it) {
+        is ViewState.Loading -> handleLoading(it.loading)
+
+        is ViewState.Success -> setAdapter(it.data)
+
+        else -> {
+          Log.e("Erro", "erro ao iniciar o viewModel de latest")
         }
       }
+    }
+
+    viewModel.getTopRated()
+  }
+
+  private fun handleLoading(mustShow: Boolean) {
+    if (mustShow) {
+      progressBar.isVisible = true
+    } else {
+      progressBar.isGone = true
+    }
+  }
+
+  private fun setAdapter(data: List<Movie>?) {
+    val popularAdapter = PopularAdapter(data.orEmpty()) {
+      (requireActivity() as MainActivity).showDetailsActivity(it)
+    }
+    recyclerView.adapter = popularAdapter
   }
 }
