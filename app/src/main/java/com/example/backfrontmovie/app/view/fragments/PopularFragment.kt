@@ -26,11 +26,13 @@ class PopularFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    binding = FragmentPopularBinding.inflate(
-      inflater,
-      container,
-      false
-    )
+    if (!::binding.isInitialized) {
+      binding = FragmentPopularBinding.inflate(
+        inflater,
+        container,
+        false
+      )
+    }
 
     return binding.root
   }
