@@ -37,7 +37,7 @@ class PopularAdapter(
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Movie) {
-      binding.cardMovieTitle.text = item.originalTitle
+      binding.cardMovieTitle.text = item.title
 
       val postPath = "https://image.tmdb.org/t/p/w185${item.posterPath}"
       Glide.with(binding.root.context).load(postPath).into(binding.cardMoviePoster)
