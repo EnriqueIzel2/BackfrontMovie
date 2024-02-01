@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".app.view.fragments.PopularFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/popular_recycler_view"
         android:layout_width="0dp"
