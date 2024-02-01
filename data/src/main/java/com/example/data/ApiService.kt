@@ -13,4 +13,7 @@ interface ApiService {
 
   @GET("popular")
   suspend fun getPopularMovie(@Query("api_key") api: String = API_KEY): MovieResultDTO
+
+  @GET("top_rated")
+  suspend fun getTopRated(@Query("api_key") api: String = API_KEY): MovieResultDTO
 }
