@@ -2,4 +2,8 @@
     <string name="app_name">Backfront Movie</string>
     <string name="bottom_menu_item_popular">Popular</string>
     <string name="bottom_menu_item_latest">Recentes</string>
+
+    <string name="card_poster_movie">Pôster do filme</string>
+    <string name="details_description_movie_banner">movie banner</string>
+    <string name="details_movie_poster">Movie Poster</string>
 </resources>
