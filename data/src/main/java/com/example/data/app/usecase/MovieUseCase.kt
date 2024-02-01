@@ -5,4 +5,6 @@ import com.example.data.commons.viewstate.ViewState
 
 interface MovieUseCase {
   suspend fun getPopular(): ViewState<List<Movie>?>
+
+  suspend fun getTopRated(): ViewState<List<Movie>?>
 }
