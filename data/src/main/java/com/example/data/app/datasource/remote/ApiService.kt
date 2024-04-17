@@ -1,4 +1,4 @@
-package com.example.data
+package com.example.data.app.datasource.remote
 
 import com.example.data.app.repository.dto.MovieResultDTO
 import com.example.data.donotshare.DEFAULT_API_KEY

@@ -2,7 +2,7 @@ package com.example.backfrontmovie.app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.data.RetrofitInitializer
+import com.example.data.app.datasource.remote.RetrofitInitializer
 import com.example.data.app.repository.MovieRepositoryImpl
 import com.example.data.app.usecase.MovieUseCaseImpl
 
