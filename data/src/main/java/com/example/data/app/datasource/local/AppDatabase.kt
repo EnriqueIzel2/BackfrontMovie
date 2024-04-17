@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.data.app.datasource.local.dao.AppDAO
 import com.example.data.app.repository.model.Movie
 
 @Database(
@@ -39,4 +40,6 @@ abstract class AppDatabase : RoomDatabase() {
       }
     }
   }
+
+  abstract val appDAO: AppDAO
 }
