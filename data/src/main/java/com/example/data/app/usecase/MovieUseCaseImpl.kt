@@ -21,4 +21,22 @@ class MovieUseCaseImpl(private val repository: MovieRepository) : MovieUseCase {
 
     return ViewState.Success(movies)
   }
+
+  override suspend fun insertMovie(movie: Movie): ViewState<Movie> {
+    return try {
+      repository.insertMovie(movie)
+      ViewState.Success(movie)
+    } catch (e: Exception) {
+      ViewState.Error(e)
+    }
+  }
+
+  override suspend fun getMovies(): ViewState<List<Movie>?> {
+    return try {
+      val movies = repository.getMovies()
+      ViewState.Success(movies)
+    } catch (e: Exception) {
+      ViewState.Error(e)
+    }
+  }
 }
