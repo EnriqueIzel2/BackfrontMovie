@@ -10,4 +10,8 @@
         android:icon="@drawable/icon_av_timer_24"
         android:title="@string/bottom_menu_item_latest"
         />
+
+    <item android:id="@+id/menu_favorites"
+        android:icon="@drawable/icon_home"
+        android:title="@string/menu_icon_favorites"/>
 </menu>
