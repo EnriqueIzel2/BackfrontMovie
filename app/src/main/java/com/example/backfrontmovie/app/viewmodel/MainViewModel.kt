@@ -73,8 +73,8 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
     }
   }
 
-  private val _movies = MediatorLiveData<ViewState<List<Movie>?>>()
-  val movies: LiveData<ViewState<List<Movie>?>> = _movies.map { it }
+  private val _getMovies = MediatorLiveData<ViewState<List<Movie>?>>()
+  val getMovies: LiveData<ViewState<List<Movie>?>> = _getMovies.map { it }
 
   fun getMovies() {
     viewModelScope.launch {
@@ -83,9 +83,9 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
           useCase.getMovies()
         }
 
-        _movies.value = moviesResponse
+        _getMovies.value = moviesResponse
       }.onFailure {
-        _movies.value = ViewState.Error(it)
+        _getMovies.value = ViewState.Error(it)
       }
     }
   }
