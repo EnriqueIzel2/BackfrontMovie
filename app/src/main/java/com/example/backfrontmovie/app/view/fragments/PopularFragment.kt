@@ -44,7 +44,7 @@ class PopularFragment : Fragment() {
   }
 
   private fun setupViewModel() {
-    val viewModel = MainViewModelFactory().create(MainViewModel::class.java)
+    val viewModel = MainViewModelFactory(requireContext()).create(MainViewModel::class.java)
 
     viewModel.popularMovies.observe(viewLifecycleOwner) {
 
