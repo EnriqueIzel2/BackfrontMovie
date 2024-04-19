@@ -2,9 +2,9 @@ package com.example.backfrontmovie.app.view.details
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
 import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
@@ -68,7 +68,8 @@ class DetailsActivity : AppCompatActivity() {
     viewModel.insertMovie.observe(this) { state ->
       when (state) {
         is ViewState.Success -> {
-          viewModel.getMovies()
+          // TODO: Make the button remove from the favorites after it has been added
+          addButton.isVisible = false
         }
 
         is ViewState.Error -> {
@@ -77,22 +78,6 @@ class DetailsActivity : AppCompatActivity() {
 
         else -> {
           //
-        }
-      }
-    }
-
-    viewModel.getMovies.observe(this) { state ->
-      when (state) {
-        is ViewState.Success -> {
-          Log.i("Details", "setupViewModel: ${state.data?.size}")
-        }
-
-        is ViewState.Error -> {
-          state.throwable
-        }
-
-        else -> {
-
         }
       }
     }
