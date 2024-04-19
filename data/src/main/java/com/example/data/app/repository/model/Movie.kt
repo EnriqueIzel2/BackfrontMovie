@@ -2,6 +2,7 @@ package com.example.data.app.repository.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.data.app.repository.dto.GenreDTO
 import com.example.data.app.repository.dto.ProductionCompanyDTO
@@ -14,29 +15,34 @@ import kotlinx.parcelize.RawValue
 @Entity("movie")
 data class Movie(
   @PrimaryKey
-  val id: Int? = null,
-  val adult: Boolean? = null,
-  val backdropPath: String? = null,
-  val belongsToCollection: @RawValue Any? = null,
-  val budget: Int? = null,
-  val genres: List<GenreDTO?>? = null,
-  val homepage: String? = null,
-  val imdbId: String? = null,
-  val originalLanguage: String? = null,
-  val originalTitle: String? = null,
-  val overview: String? = null,
-  val popularity: Double? = null,
-  val posterPath: String? = null,
-  val productionCompanies: List<ProductionCompanyDTO?>? = null,
-  val productionCountries: List<ProductionCountryDTO?>? = null,
-  val releaseDate: String? = null,
-  val revenue: Int? = null,
-  val runtime: Int? = null,
-  val spokenLanguages: List<SpokenLanguageDTO?>? = null,
-  val status: String? = null,
-  val tagline: String? = null,
-  val title: String? = null,
-  val video: Boolean? = null,
-  val voteAverage: Double? = null,
-  val voteCount: Int? = null
+  var id: Int? = null,
+  var adult: Boolean? = null,
+  var backdropPath: String? = null,
+  @Ignore
+  var belongsToCollection: @RawValue Any? = null,
+  var budget: Int? = null,
+  @Ignore
+  var genres: List<GenreDTO?>? = null,
+  var homepage: String? = null,
+  var imdbId: String? = null,
+  var originalLanguage: String? = null,
+  var originalTitle: String? = null,
+  var overview: String? = null,
+  var popularity: Double? = null,
+  var posterPath: String? = null,
+  @Ignore
+  var productionCompanies: List<ProductionCompanyDTO?>? = null,
+  @Ignore
+  var productionCountries: List<ProductionCountryDTO?>? = null,
+  var releaseDate: String? = null,
+  var revenue: Int? = null,
+  var runtime: Int? = null,
+  @Ignore
+  var spokenLanguages: List<SpokenLanguageDTO?>? = null,
+  var status: String? = null,
+  var tagline: String? = null,
+  var title: String? = null,
+  var video: Boolean? = null,
+  var voteAverage: Double? = null,
+  var voteCount: Int? = null
 ) : Parcelable
