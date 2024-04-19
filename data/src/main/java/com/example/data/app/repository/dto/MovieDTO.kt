@@ -5,6 +5,8 @@ import com.example.data.app.repository.model.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieDTO(
+  @SerializedName("id")
+  val id: Int? = null,
   @SerializedName("adult")
   val adult: Boolean? = null,
   @SerializedName("backdrop_path")
@@ -17,8 +19,6 @@ data class MovieDTO(
   val genres: List<GenreDTO?>? = null,
   @SerializedName("homepage")
   val homepage: String? = null,
-  @SerializedName("id")
-  val id: Int? = null,
   @SerializedName("imdb_id")
   val imdbId: String? = null,
   @SerializedName("original_language")
@@ -59,13 +59,13 @@ data class MovieDTO(
 
 fun MovieDTO.toMovie(): Movie {
   return Movie(
+    id,
     adult,
     backdropPath,
     belongsToCollection,
     budget,
     genres,
     homepage,
-    id,
     imdbId,
     originalLanguage,
     originalTitle,
