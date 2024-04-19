@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
+import com.example.backfrontmovie.app.viewmodel.MainViewModel
+import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
 import com.example.backfrontmovie.commons.extensions.formatToLatamDate
 import com.example.backfrontmovie.databinding.ActivityDetailsBinding
 import com.example.data.app.repository.model.Movie
+import com.example.data.commons.viewstate.ViewState
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -17,6 +21,10 @@ class DetailsActivity : AppCompatActivity() {
   private val detailsReleaseDate by lazy { binding.detailsReleaseDate }
   private val detailsPoster by lazy { binding.detailsPoster }
   private val detailsOverview by lazy { binding.detailsOverview }
+  private val addButton by lazy { binding.detailsButtonAddFavorite }
+
+  private lateinit var viewModel: MainViewModel
+  private var movie: Movie? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -25,10 +33,13 @@ class DetailsActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     intent.extras?.let {
-      val item = it.getParcelable("item") as Movie?
+      movie = it.getParcelable("item") as Movie?
 
-      setupItemView(item)
+      setupItemView(movie)
     }
+
+    setupOnClickListener()
+    setupViewModel()
   }
 
   private fun setupItemView(item: Movie?) {
@@ -42,6 +53,49 @@ class DetailsActivity : AppCompatActivity() {
     detailsTitle.text = item?.title
     detailsReleaseDate.text = item?.releaseDate?.formatToLatamDate()
     detailsOverview.text = item?.overview
+  }
+
+  private fun setupOnClickListener() {
+    addButton.setOnClickListener {
+      movie?.let {
+        viewModel.insertMovie(it)
+      }
+    }
+  }
+
+  private fun setupViewModel() {
+    viewModel = MainViewModelFactory(this).create(MainViewModel::class.java)
+    viewModel.insertMovie.observe(this) { state ->
+      when (state) {
+        is ViewState.Success -> {
+          viewModel.getMovies()
+        }
+
+        is ViewState.Error -> {
+          state.throwable
+        }
+
+        else -> {
+          //
+        }
+      }
+    }
+
+    viewModel.getMovies.observe(this) { state ->
+      when (state) {
+        is ViewState.Success -> {
+          Log.i("Details", "setupViewModel: ${state.data?.size}")
+        }
+
+        is ViewState.Error -> {
+          state.throwable
+        }
+
+        else -> {
+
+        }
+      }
+    }
   }
 
   companion object {
