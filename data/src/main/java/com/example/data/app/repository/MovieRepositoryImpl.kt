@@ -25,4 +25,8 @@ class MovieRepositoryImpl(
   override suspend fun getMovies(): List<Movie>? {
     return localDataSource.getMovies()
   }
+
+  override suspend fun checkIfMovieIsSavedLocally(itemId: Int): Movie? {
+    return localDataSource.checkIfIsMovieSavedLocally(itemId)
+  }
 }
