@@ -67,7 +67,9 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     removeButton.setOnClickListener {
-      Log.i("Details Activity", "setupOnClickListener: Ovô remuvê")
+      movie?.let {
+        viewModel.removeMovie(it.id!!)
+      }
     }
   }
 
