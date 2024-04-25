@@ -1,5 +1,6 @@
 package com.example.backfrontmovie.app.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -103,6 +104,18 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
         _getMovies.value = moviesResponse
       }.onFailure {
         _getMovies.value = ViewState.Error(it)
+      }
+    }
+  }
+
+  fun removeMovie(itemID: Int) {
+    viewModelScope.launch {
+      runCatching {
+        withContext(Dispatchers.IO) {
+          useCase.removeMovie(itemID)
+        }
+      }.onFailure {
+        Log.e("MainViewModel", "removeMovie: $it")
       }
     }
   }
