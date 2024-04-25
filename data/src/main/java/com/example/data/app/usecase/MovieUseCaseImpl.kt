@@ -48,4 +48,12 @@ class MovieUseCaseImpl(private val repository: MovieRepository) : MovieUseCase {
       null
     }
   }
+
+  override suspend fun removeMovie(itemId: Int) {
+    try {
+      repository.removeMovie(itemId)
+    } catch (e: Exception) {
+      ViewState.Error(e)
+    }
+  }
 }

@@ -29,4 +29,8 @@ class MovieRepositoryImpl(
   override suspend fun checkIfMovieIsSavedLocally(itemId: Int): Movie? {
     return localDataSource.checkIfIsMovieSavedLocally(itemId)
   }
+
+  override suspend fun removeMovie(itemId: Int) {
+    return localDataSource.removeMovie(itemId)
+  }
 }
