@@ -95,6 +95,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/details_poster"
                 app:layout_constraintTop_toTopOf="@+id/details_poster" />
+
+            <Button
+                android:id="@+id/details_button_remove_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_btn_remove_favorite"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/details_poster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/details_poster"
+                app:layout_constraintTop_toTopOf="@+id/details_poster" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
