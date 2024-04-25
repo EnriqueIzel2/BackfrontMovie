@@ -14,4 +14,7 @@ interface AppDAO {
 
   @Query("SELECT * FROM movie")
   fun getMovies(): List<Movie>?
+
+  @Query("SELECT * FROM movie WHERE id = :itemId")
+  fun checkIfIsMovieSavedLocally(itemId: Int): Movie?
 }
