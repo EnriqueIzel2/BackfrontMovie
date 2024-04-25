@@ -17,4 +17,7 @@ interface AppDAO {
 
   @Query("SELECT * FROM movie WHERE id = :itemId")
   fun checkIfIsMovieSavedLocally(itemId: Int): Movie?
+
+  @Query("DELETE FROM movie WHERE id = :itemId")
+  fun removeMovie(itemId: Int)
 }
