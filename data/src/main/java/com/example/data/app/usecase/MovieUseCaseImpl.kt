@@ -39,4 +39,13 @@ class MovieUseCaseImpl(private val repository: MovieRepository) : MovieUseCase {
       ViewState.Error(e)
     }
   }
+
+  override suspend fun checkIfMovieIsSavedLocally(itemId: Int): Movie? {
+    return try {
+      val movie = repository.checkIfMovieIsSavedLocally(itemId)
+      movie
+    } catch (e: Exception) {
+      null
+    }
+  }
 }
