@@ -13,6 +13,23 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
+  private val _isDataSavedLocally = MediatorLiveData<ViewState<Boolean>>()
+  val isDataSavedLocally: LiveData<ViewState<Boolean>> = _isDataSavedLocally
+
+  fun checkIfDataIsSavedLocally(itemID: Int) {
+    viewModelScope.launch(Dispatchers.Main) {
+      runCatching {
+        val movieBD = withContext(Dispatchers.IO) {
+          val hasMovie = useCase.checkIfMovieIsSavedLocally(itemID)
+          if (hasMovie != null) {
+            _isDataSavedLocally.value = ViewState.Success(true)
+          }
+        }
+      }.onFailure {
+        _isDataSavedLocally.value = ViewState.Error(it)
+      }
+    }
+  }
 
   private val _popularMovies = MediatorLiveData<ViewState<List<Movie>?>>()
   val popularMovies: LiveData<ViewState<List<Movie>?>> = _popularMovies.map { it }
