@@ -10,4 +10,5 @@ interface MovieRepository {
   suspend fun insertMovie(movie: Movie)
   suspend fun getMovies(): List<Movie>?
   suspend fun checkIfMovieIsSavedLocally(itemId: Int): Movie?
+  suspend fun removeMovie(itemId: Int)
 }
