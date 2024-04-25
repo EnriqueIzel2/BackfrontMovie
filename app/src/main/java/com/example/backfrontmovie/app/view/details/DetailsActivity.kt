@@ -3,8 +3,9 @@ package com.example.backfrontmovie.app.view.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
 import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
@@ -16,12 +17,14 @@ import com.example.data.commons.viewstate.ViewState
 class DetailsActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityDetailsBinding
+
   private val detailsTitle by lazy { binding.detailsTitle }
   private val detailsBackground by lazy { binding.detailsBackground }
   private val detailsReleaseDate by lazy { binding.detailsReleaseDate }
   private val detailsPoster by lazy { binding.detailsPoster }
   private val detailsOverview by lazy { binding.detailsOverview }
   private val addButton by lazy { binding.detailsButtonAddFavorite }
+  private val removeButton by lazy { binding.detailsButtonRemoveFavorite }
 
   private lateinit var viewModel: MainViewModel
   private var movie: Movie? = null
@@ -53,6 +56,7 @@ class DetailsActivity : AppCompatActivity() {
     detailsTitle.text = item?.title
     detailsReleaseDate.text = item?.releaseDate?.formatToLatamDate()
     detailsOverview.text = item?.overview
+
   }
 
   private fun setupOnClickListener() {
@@ -61,15 +65,28 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.insertMovie(it)
       }
     }
+
+    removeButton.setOnClickListener {
+      Log.i("Details Activity", "setupOnClickListener: Ovô remuvê")
+    }
   }
 
   private fun setupViewModel() {
     viewModel = MainViewModelFactory(this).create(MainViewModel::class.java)
+    viewModel.checkIfDataIsSavedLocally(movie?.id!!)
+
+    viewModel.isDataSavedLocally.observe(this) { isSaved ->
+      isSaved.let {
+        addButton.visibility = View.GONE
+        removeButton.visibility = View.VISIBLE
+      }
+    }
+
     viewModel.insertMovie.observe(this) { state ->
       when (state) {
         is ViewState.Success -> {
-          // TODO: Make the button remove from the favorites after it has been added
-          addButton.isVisible = false
+          addButton.visibility = View.GONE
+          removeButton.visibility = View.VISIBLE
         }
 
         is ViewState.Error -> {
@@ -77,7 +94,7 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         else -> {
-          //
+          Log.e("Details Activity", "setupViewModel: Erro ao inicializar a viewModel")
         }
       }
     }
