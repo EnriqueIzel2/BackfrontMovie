@@ -39,8 +39,6 @@ class FavoriteFragment : Fragment() {
     viewModel.getMovies.observe(viewLifecycleOwner) { state ->
       when (state) {
         is ViewState.Success -> {
-          Log.i("Details", "setupViewModel: ${state.data?.size}")
-
           val mAdapter = PopularAdapter(state.data.orEmpty()) { movie ->
             (requireActivity() as MainActivity).showDetailsActivity(movie)
           }
@@ -52,7 +50,7 @@ class FavoriteFragment : Fragment() {
         }
 
         else -> {
-
+          Log.e("Favorite Fragment", "setupViewModel: Erro ao inicializar a viewModel")
         }
       }
     }
