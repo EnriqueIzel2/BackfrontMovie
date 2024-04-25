@@ -6,4 +6,5 @@
     <string name="details_movie_poster">Movie Poster</string>
     <string name="details_btn_add_favorite">Add Favorite</string>
     <string name="menu_icon_favorites">Favorites</string>
+    <string name="details_btn_remove_favorite">Remove Favorite</string>
 </resources>
