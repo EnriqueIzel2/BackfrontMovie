@@ -10,5 +10,5 @@ interface MovieUseCase {
   suspend fun insertMovie(movie: Movie): ViewState<Movie>
   suspend fun getMovies(): ViewState<List<Movie>?>
   suspend fun checkIfMovieIsSavedLocally(itemId: Int): Movie?
-  suspend fun removeMovie(itemId: Int)
+  suspend fun removeMovie(itemId: Int): ViewState<Boolean>
 }
