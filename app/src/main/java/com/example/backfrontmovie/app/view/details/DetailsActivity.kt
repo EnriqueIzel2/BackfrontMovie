@@ -69,6 +69,7 @@ class DetailsActivity : AppCompatActivity() {
     removeButton.setOnClickListener {
       movie?.let {
         viewModel.removeMovie(it.id!!)
+        viewModel.checkIfDataIsSavedLocally(it.id!!)
       }
     }
   }
@@ -98,6 +99,19 @@ class DetailsActivity : AppCompatActivity() {
         else -> {
           Log.e("Details Activity", "setupViewModel: Erro ao inicializar a viewModel")
         }
+      }
+    }
+
+    viewModel.removeMovie.observe(this) { state ->
+      when (state) {
+        is ViewState.Success -> {
+          removeButton.visibility = View.GONE
+          addButton.visibility = View.VISIBLE
+        }
+
+        is ViewState.Error -> state.throwable
+
+        else -> Log.e("Details Activity", "setupViewModel: Erro ao atualizar após remoção")
       }
     }
   }
