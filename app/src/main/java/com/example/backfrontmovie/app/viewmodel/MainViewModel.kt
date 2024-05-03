@@ -108,13 +108,18 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
     }
   }
 
+  private val _removeMovie = MediatorLiveData<ViewState<Boolean>>()
+  val removeMovie: LiveData<ViewState<Boolean>> = _removeMovie
+
   fun removeMovie(itemID: Int) {
     viewModelScope.launch {
       runCatching {
-        withContext(Dispatchers.IO) {
+        val moviesUpdate = withContext(Dispatchers.IO) {
           useCase.removeMovie(itemID)
         }
+        _removeMovie.value = moviesUpdate
       }.onFailure {
+        _removeMovie.value = ViewState.Error(it)
         Log.e("MainViewModel", "removeMovie: $it")
       }
     }
