@@ -17,6 +17,7 @@ class FavoriteFragment : Fragment() {
 
   private lateinit var binding: FragmentFavoriteBinding
   private val recyclerView by lazy { binding.recyclerViewFavorite }
+  private lateinit var mAdapter: PopularAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +28,8 @@ class FavoriteFragment : Fragment() {
     return binding.root
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  override fun onResume() {
+    super.onResume()
 
     setupViewModel()
   }
@@ -39,7 +40,7 @@ class FavoriteFragment : Fragment() {
     viewModel.getMovies.observe(viewLifecycleOwner) { state ->
       when (state) {
         is ViewState.Success -> {
-          val mAdapter = PopularAdapter(state.data.orEmpty()) { movie ->
+          mAdapter = PopularAdapter(state.data.orEmpty()) { movie ->
             (requireActivity() as MainActivity).showDetailsActivity(movie)
           }
           recyclerView.adapter = mAdapter
