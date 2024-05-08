@@ -114,10 +114,11 @@ class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
   fun removeMovie(itemID: Int) {
     viewModelScope.launch {
       runCatching {
-        val moviesUpdate = withContext(Dispatchers.IO) {
+        val isMovieRemoved = withContext(Dispatchers.IO) {
           useCase.removeMovie(itemID)
         }
-        _removeMovie.value = moviesUpdate
+
+        _removeMovie.value = isMovieRemoved
       }.onFailure {
         _removeMovie.value = ViewState.Error(it)
         Log.e("MainViewModel", "removeMovie: $it")
