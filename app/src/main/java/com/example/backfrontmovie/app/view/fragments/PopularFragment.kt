@@ -11,16 +11,18 @@ import androidx.fragment.app.Fragment
 import com.example.backfrontmovie.app.view.MainActivity
 import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
-import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
 import com.example.backfrontmovie.databinding.FragmentPopularBinding
 import com.example.data.app.repository.model.Movie
 import com.example.data.commons.viewstate.ViewState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment() {
 
   private lateinit var binding: FragmentPopularBinding
   private val recyclerView by lazy { binding.popularRecyclerView }
   private val progressBar by lazy { binding.popularProgressBar }
+
+  private val viewModel: MainViewModel by viewModel()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +46,6 @@ class PopularFragment : Fragment() {
   }
 
   private fun setupViewModel() {
-    val viewModel = MainViewModelFactory(requireContext()).create(MainViewModel::class.java)
-
     viewModel.popularMovies.observe(viewLifecycleOwner) {
 
       when (it) {
