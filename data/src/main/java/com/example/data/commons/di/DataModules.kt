@@ -6,6 +6,8 @@ import com.example.data.app.datasource.local.dao.AppDAO
 import com.example.data.app.datasource.remote.RetrofitInitializer
 import com.example.data.app.repository.MovieRepository
 import com.example.data.app.repository.MovieRepositoryImpl
+import com.example.data.app.usecase.MovieUseCase
+import com.example.data.app.usecase.MovieUseCaseImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -31,7 +33,7 @@ private val repositoryModule = module {
 }
 
 private val useCaseModule = module {
-  single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
+  single<MovieUseCase> { MovieUseCaseImpl(get()) }
 }
 
 fun getDataModules() =  listOf(
