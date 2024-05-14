@@ -47,6 +47,7 @@ As seguintes tecnologias foram usadas nesse projeto:
   <li><a href="https://square.github.io/retrofit/">Retrofit</a></li>
   <li><a href="https://github.com/google/gson">Gson</a></li>
   <li><a href="https://developer.android.com/training/data-storage/room?hl=pt-br">Room</a></li>
+  <li><a href="https://insert-koin.io/">Koin</a></li>
 </ul>
 
 ---
