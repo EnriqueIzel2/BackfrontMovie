@@ -9,15 +9,17 @@ import androidx.fragment.app.Fragment
 import com.example.backfrontmovie.app.view.MainActivity
 import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
-import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
 import com.example.backfrontmovie.databinding.FragmentFavoriteBinding
 import com.example.data.commons.viewstate.ViewState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
 
   private lateinit var binding: FragmentFavoriteBinding
   private val recyclerView by lazy { binding.recyclerViewFavorite }
   private lateinit var mAdapter: PopularAdapter
+
+  private val viewModel: MainViewModel by viewModel()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +37,6 @@ class FavoriteFragment : Fragment() {
   }
 
   private fun setupViewModel() {
-    val viewModel = MainViewModelFactory(requireContext()).create(MainViewModel::class.java)
-
     viewModel.getMovies.observe(viewLifecycleOwner) { state ->
       when (state) {
         is ViewState.Success -> {
