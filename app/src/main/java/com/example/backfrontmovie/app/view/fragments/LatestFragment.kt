@@ -11,16 +11,18 @@ import androidx.fragment.app.Fragment
 import com.example.backfrontmovie.app.view.MainActivity
 import com.example.backfrontmovie.app.view.fragments.adapter.PopularAdapter
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
-import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
 import com.example.backfrontmovie.databinding.FragmentLatestBinding
 import com.example.data.app.repository.model.Movie
 import com.example.data.commons.viewstate.ViewState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LatestFragment : Fragment() {
 
   private lateinit var binding: FragmentLatestBinding
   private val recyclerView by lazy { binding.latestRecyclerView }
   private val progressBar by lazy { binding.latestProgressBar }
+
+  private val viewModel: MainViewModel by viewModel()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +44,6 @@ class LatestFragment : Fragment() {
   }
 
   private fun setupViewModel() {
-    val viewModel = MainViewModelFactory(requireContext()).create(MainViewModel::class.java)
-
     viewModel.topRatedMovies.observe(viewLifecycleOwner) {
 
       when (it) {
