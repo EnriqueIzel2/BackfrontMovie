@@ -56,4 +56,5 @@ dependencies {
   kapt("androidx.room:room-compiler:2.6.1")
   implementation("androidx.room:room-common:2.6.1")
   implementation("androidx.room:room-ktx:2.6.1")
+  implementation("io.insert-koin:koin-android:3.6.0-wasm-alpha2")
 }
