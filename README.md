@@ -19,7 +19,6 @@
 
 <p align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3VncXphOXRlcTF5cXA2ZXJpeG5rNmRqd21xb3Flcm1udDJnNzFkNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vx5YcZn8irTtqPbU2t/giphy.gif" />
-  <span width="50px">.</span>
   <img src="./demos/demo01.png" width="222px" height="480px" />
   <img src="./demos/demo02.png" width="222px" height="480px" />
 </p>
