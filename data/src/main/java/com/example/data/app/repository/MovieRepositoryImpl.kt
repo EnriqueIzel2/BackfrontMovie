@@ -4,8 +4,9 @@ import com.example.data.app.datasource.local.dao.AppDAO
 import com.example.data.app.datasource.remote.ApiService
 import com.example.data.app.repository.dto.MovieResultDTO
 import com.example.data.app.repository.model.Movie
+import javax.inject.Inject
 
-class MovieRepositoryImpl(
+class MovieRepositoryImpl @Inject constructor(
   private val remoteDataSource: ApiService,
   private val localDataSource: AppDAO
 ) : MovieRepository {

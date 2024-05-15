@@ -4,8 +4,9 @@ import com.example.data.app.repository.MovieRepository
 import com.example.data.app.repository.model.Movie
 import com.example.data.commons.mapper.MovieMapper
 import com.example.data.commons.viewstate.ViewState
+import javax.inject.Inject
 
-class MovieUseCaseImpl(private val repository: MovieRepository) : MovieUseCase {
+class MovieUseCaseImpl @Inject constructor(private val repository: MovieRepository) : MovieUseCase {
   override suspend fun getPopular(): ViewState<List<Movie>?> {
     val response = repository.getPopular()
 
