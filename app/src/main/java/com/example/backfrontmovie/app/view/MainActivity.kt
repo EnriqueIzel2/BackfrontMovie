@@ -11,7 +11,9 @@ import com.example.backfrontmovie.R
 import com.example.backfrontmovie.app.view.details.DetailsActivity
 import com.example.backfrontmovie.databinding.ActivityMainBinding
 import com.example.data.app.repository.model.Movie
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMainBinding
