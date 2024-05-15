@@ -5,15 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.backfrontmovie.app.viewmodel.MainViewModel
-import com.example.backfrontmovie.app.viewmodel.MainViewModelFactory
 import com.example.backfrontmovie.commons.extensions.formatToLatamDate
 import com.example.backfrontmovie.databinding.ActivityDetailsBinding
 import com.example.data.app.repository.model.Movie
 import com.example.data.commons.viewstate.ViewState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityDetailsBinding
@@ -26,7 +28,7 @@ class DetailsActivity : AppCompatActivity() {
   private val addButton by lazy { binding.detailsButtonAddFavorite }
   private val removeButton by lazy { binding.detailsButtonRemoveFavorite }
 
-  private lateinit var viewModel: MainViewModel
+  private val viewModel: MainViewModel by viewModels()
   private var movie: Movie? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +77,6 @@ class DetailsActivity : AppCompatActivity() {
   }
 
   private fun setupViewModel() {
-    viewModel = MainViewModelFactory(this).create(MainViewModel::class.java)
     viewModel.checkIfDataIsSavedLocally(movie?.id!!)
 
     viewModel.isDataSavedLocally.observe(this) { isSaved ->
