@@ -9,18 +9,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.app.repository.model.Movie
 import com.example.data.app.usecase.MovieUseCase
 import com.example.data.commons.viewstate.ViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MainViewModel(private val useCase: MovieUseCase) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val useCase: MovieUseCase) : ViewModel() {
   private val _isDataSavedLocally = MediatorLiveData<ViewState<Boolean>>()
   val isDataSavedLocally: LiveData<ViewState<Boolean>> = _isDataSavedLocally
 
   fun checkIfDataIsSavedLocally(itemID: Int) {
     viewModelScope.launch(Dispatchers.Main) {
       runCatching {
-        val movieBD = withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
           val hasMovie = useCase.checkIfMovieIsSavedLocally(itemID)
           if (hasMovie != null) {
             _isDataSavedLocally.value = ViewState.Success(true)
