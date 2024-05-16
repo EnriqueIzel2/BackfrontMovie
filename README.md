@@ -33,6 +33,7 @@
 - [x] Salvar dados em um banco de dados local;
 - [x] Requisição a API externa;
 - [x] Arquitetura MVVM;
+- [x] Injeção de Dependências.
 
 ---
 
