@@ -3,6 +3,7 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("com.google.dagger.hilt.android")
   id("kotlin-kapt")
+  id("com.google.gms.google-services")
 }
 
 android {
@@ -59,4 +60,5 @@ dependencies {
   implementation("androidx.room:room-ktx:2.6.1")
   implementation("com.google.dagger:hilt-android:2.51.1")
   kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+  implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
 }
