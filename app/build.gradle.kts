@@ -2,6 +2,8 @@ plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
   id("kotlin-kapt")
+  id("com.google.gms.google-services")
+  id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -57,4 +59,7 @@ dependencies {
   implementation("androidx.room:room-common:2.6.1")
   implementation("androidx.room:room-ktx:2.6.1")
   implementation("io.insert-koin:koin-android:3.6.0-wasm-alpha2")
+  implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+  implementation("com.google.firebase:firebase-crashlytics")
+  implementation("com.google.firebase:firebase-analytics")
 }
