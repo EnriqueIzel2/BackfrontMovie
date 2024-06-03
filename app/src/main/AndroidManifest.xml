@@ -16,17 +16,21 @@
         android:theme="@style/Theme.BackfrontMovie"
         tools:targetApi="31">
         <activity
-            android:name=".app.view.details.DetailsActivity"
-            android:exported="false"
-            android:parentActivityName=".app.view.MainActivity" />
-        <activity
-            android:name=".app.view.MainActivity"
+            android:name=".app.view.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.view.details.DetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".app.view.MainActivity" />
+        <activity
+            android:name=".app.view.MainActivity"
+            android:exported="true">
         </activity>
     </application>
 
