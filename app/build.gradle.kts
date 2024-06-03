@@ -52,15 +52,23 @@ dependencies {
   implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
   implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
   implementation("com.github.bumptech.glide:glide:4.16.0")
+  implementation("androidx.activity:activity:1.8.0")
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.1.5")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+//  Koin
   kapt("androidx.room:room-compiler:2.6.1")
   implementation("androidx.room:room-common:2.6.1")
   implementation("androidx.room:room-ktx:2.6.1")
+
+//  Koin
   implementation("io.insert-koin:koin-android:3.6.0-wasm-alpha2")
+
+//  Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
   implementation("com.google.firebase:firebase-crashlytics")
+  implementation("com.google.firebase:firebase-messaging-ktx")
+  implementation("com.google.firebase:firebase-auth-ktx")
   implementation("com.google.firebase:firebase-analytics")
-  implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
 }
