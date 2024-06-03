@@ -1,6 +1,7 @@
 package com.example.backfrontmovie.app.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.example.backfrontmovie.R
 import com.example.backfrontmovie.app.view.details.DetailsActivity
 import com.example.backfrontmovie.databinding.ActivityMainBinding
 import com.example.data.app.repository.model.Movie
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     setupBottomNavigation()
+    getToken()
   }
 
   private fun setupBottomNavigation() {
@@ -42,5 +45,14 @@ class MainActivity : AppCompatActivity() {
     )
 
     startActivity(intent, transitionOptions.toBundle())
+  }
+
+  private fun getToken() {
+    FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+      if (task.isSuccessful) {
+        val token = task.result
+        Log.i("Firebase", "getToken: $token")
+      }
+    }
   }
 }
