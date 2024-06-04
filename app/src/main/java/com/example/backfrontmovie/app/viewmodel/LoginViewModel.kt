@@ -1,5 +1,7 @@
 package com.example.backfrontmovie.app.viewmodel
 
+import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +25,18 @@ class LoginViewModel : ViewModel() {
       _loginState.value = ViewState.Success(user)
     } else {
       _loginState.value = ViewState.Error(Throwable("No user found"))
+    }
+  }
+
+  fun login(activity: Activity, email: String, password: String) {
+    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(activity) { task ->
+      if (task.isSuccessful) {
+        val user = auth.currentUser
+        _loginState.value = ViewState.Success(user)
+        Log.i("login", "login: usuário logou")
+      } else {
+        _loginState.value = ViewState.Error(Throwable("Erro ao logar usuário"))
+      }
     }
   }
 }
