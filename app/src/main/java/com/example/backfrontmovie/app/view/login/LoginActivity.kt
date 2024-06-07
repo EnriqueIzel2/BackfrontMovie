@@ -1,8 +1,10 @@
 package com.example.backfrontmovie.app.view.login
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.backfrontmovie.app.view.MainActivity
 import com.example.backfrontmovie.app.viewmodel.LoginViewModel
 import com.example.backfrontmovie.databinding.ActivityLoginBinding
 import com.example.data.commons.viewstate.ViewState
@@ -14,6 +16,9 @@ class LoginActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityLoginBinding
   private val loginButton by lazy { binding.loginButton }
+
+  private val loginEmail by lazy { binding.loginEmailContainer.editText?.text.toString() }
+  private val loginPassword by lazy { binding.loginPasswordContainer.editText?.text.toString() }
 
   override fun onStart() {
     super.onStart()
@@ -31,8 +36,9 @@ class LoginActivity : AppCompatActivity() {
   }
 
   private fun handleLoginButton() {
+    // TODO it needs a method to check if the field isn't null
     loginButton.setOnClickListener {
-      loginViewModel.login(this, "teste@teste.com", "123456")
+      loginViewModel.login(this, loginEmail, loginPassword)
     }
   }
 
@@ -40,11 +46,13 @@ class LoginActivity : AppCompatActivity() {
     loginViewModel.loginState.observe(this) { state ->
       when (state) {
         is ViewState.Success -> {
-          Log.i("loginActivity", "setObservable: Usuário logado ${state.data}")
+          val intent = Intent(this, MainActivity::class.java)
+          intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+          startActivity(intent)
         }
 
         else -> {
-          Log.e("loginActivity", "setObservable: $state")
+          Toast.makeText(this, "Erro ao realizar login", Toast.LENGTH_SHORT).show()
         }
       }
     }
