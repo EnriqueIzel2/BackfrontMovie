@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
   private fun handleLoginButton() {
     // TODO it needs a method to check if the field isn't null
+    // Teste commitK
     loginButton.setOnClickListener {
       loginViewModel.login(this, loginEmail, loginPassword)
     }
